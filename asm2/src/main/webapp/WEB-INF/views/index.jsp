@@ -30,6 +30,21 @@
                     <a class="nav-link active" aria-current="page" href="/khach-hang">Khách hàng</a>
                 </li>
             </ul>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/size">Kích cỡ</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/mau-sac">Màu sắc</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/hoa-don">Hóa đơn</a>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>

@@ -38,6 +38,21 @@
                     <a class="nav-link active" aria-current="page" href="/khach-hang">Khách hàng</a>
                 </li>
             </ul>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/size">Kích cỡ</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/mau-sac">Màu sắc</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/hoa-don">Hóa đơn</a>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>
@@ -90,7 +105,7 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${ds}" var="a" varStatus="i">
+    <c:forEach items="${ds.content}" var="a" varStatus="i">
         <tr>
             <th scope="row">${i.index+1}</th>
             <td>${a.id}</td>
@@ -108,6 +123,8 @@
     </c:forEach>
     </tbody>
 </table>
+    <a href="san-pham?page=${ds.number-1}" class="btn btn-success">Preview</a>
+    <a href="san-pham?page=${ds.number+1}" class="btn btn-success">Next</a>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

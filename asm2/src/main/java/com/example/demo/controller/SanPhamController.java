@@ -6,6 +6,9 @@ import com.example.demo.model.SanPham;
 import com.example.demo.repository.DanhMucInterface;
 import com.example.demo.repository.SanPhamInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,8 +27,10 @@ import java.time.LocalDateTime;
         DanhMucInterface dmi;
 
         @GetMapping("/san-pham")
-        public String getAll(Model model , DanhMuc dm){
-            model.addAttribute("ds",spi.findAll());
+        public String getAll(Model model ,@RequestParam("page") Integer page){
+            Pageable pageable = PageRequest.of(page,3);
+            Page<SanPham> list = spi.findAll(pageable);
+            model.addAttribute("ds",list);
             model.addAttribute("dm",dmi.findAll());
             return "viewSanPham";
         }
