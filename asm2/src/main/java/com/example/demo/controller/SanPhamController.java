@@ -28,7 +28,7 @@ import java.time.LocalDateTime;
 
         @GetMapping("/san-pham")
         public String getAll(Model model ,@RequestParam("page") Integer page){
-            Pageable pageable = PageRequest.of(page,3);
+            Pageable pageable = PageRequest.of(page,5);
             Page<SanPham> list = spi.findAll(pageable);
             model.addAttribute("ds",list);
             model.addAttribute("dm",dmi.findAll());

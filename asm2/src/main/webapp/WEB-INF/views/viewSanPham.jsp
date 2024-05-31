@@ -25,7 +25,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/san-pham">Sản phẩm</a>
+                    <a class="nav-link active" aria-current="page" href="/san-pham?page=0">Sản phẩm</a>
                 </li>
             </ul>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -123,8 +123,24 @@
     </c:forEach>
     </tbody>
 </table>
-    <a href="san-pham?page=${ds.number-1}" class="btn btn-success">Preview</a>
-    <a href="san-pham?page=${ds.number+1}" class="btn btn-success">Next</a>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="san-pham?page=${ds.number-1}">Previous</a>
+            </li>
+            <c:forEach begin="1" end="${ds.totalPages}" var="page">
+                <c:if test="${ page == 1 || page == ds.totalPages || ( page >= ds.number - 1 && page <= ds.number + 1 ) }">
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="/san-pham?page=${page-1}">
+                                ${page}
+                        </a>
+                    </li>
+                </c:if>
+            </c:forEach>
+            <li class="page-item"><a class="page-link" href="san-pham?page=${ds.number+1}">Next</a></li>
+        </ul>
+    </nav>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
