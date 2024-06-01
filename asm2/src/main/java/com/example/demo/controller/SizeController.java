@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Controller
 public class SizeController {
@@ -27,8 +28,8 @@ public class SizeController {
     }
     @PostMapping("/size/add")
     public String add(@ModelAttribute("ds") Size s){
-        s.setNgayTao(LocalDateTime.now());
-        s.setNgaySua(LocalDateTime.now());
+        s.setNgayTao(new Date());
+        s.setNgaySua(new Date());
         srp.save(s);
         return  "redirect:/size";
     }
@@ -39,7 +40,7 @@ public class SizeController {
     }
     @PostMapping("/size/update")
     public String update(@ModelAttribute("ds") Size s, @RequestParam("id") Integer id){
-        s.setNgaySua(LocalDateTime.now());
+        s.setNgaySua(new Date());
         s.setNgayTao(srp.getById(id).getNgayTao());
         srp.save(s);
         return  "redirect:/size";

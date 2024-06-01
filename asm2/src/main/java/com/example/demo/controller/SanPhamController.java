@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Controller
     public class SanPhamController {
@@ -36,22 +37,22 @@ import java.time.LocalDateTime;
         }
         @PostMapping("/san-pham/add")
         public String add(@ModelAttribute("ds") SanPham sp){
-            sp.setNgayTao(LocalDateTime.now());
-            sp.setNgaySua(LocalDateTime.now());
+            sp.setNgayTao(new Date());
+            sp.setNgaySua(new Date());
             spi.save(sp);
-            return  "redirect:/san-pham";
+            return  "redirect:/san-pham?page=0";
         }
         @GetMapping ("/san-pham/delete")
         public String delete(@RequestParam("id") Integer id, Model model){
             spi.delete(spi.getById(id));
-            return  "redirect:/san-pham";
+            return  "redirect:/san-pham?page=0";
         }
         @PostMapping("/san-pham/update")
         public String update(@ModelAttribute("ds") SanPham sp, @RequestParam("id") Integer id){
-            sp.setNgaySua(LocalDateTime.now());
+            sp.setNgaySua(new Date());
             sp.setNgayTao(spi.getById(id).getNgayTao());
             spi.save(sp);
-            return  "redirect:/san-pham";
+            return  "redirect:/san-pham?page=0";
         }
         @GetMapping ("/san-pham/detail")
         public String edit(@RequestParam("id") Integer id, Model model){

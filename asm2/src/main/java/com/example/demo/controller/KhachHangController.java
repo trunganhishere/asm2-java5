@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Controller
 public class KhachHangController {
@@ -26,8 +27,8 @@ public class KhachHangController {
     }
     @PostMapping("/khach-hang/add")
     public String add(@ModelAttribute("ds") KhachHang kh, Model model){
-        kh.setNgayTao(LocalDateTime.now());
-        kh.setNgaySua(LocalDateTime.now());
+        kh.setNgayTao(new Date());
+        kh.setNgaySua(new Date());
         khi.save(kh);
         return  "redirect:/khach-hang";
     }
@@ -38,7 +39,7 @@ public class KhachHangController {
     }
     @PostMapping("/khach-hang/update")
     public String update(@ModelAttribute("ds") KhachHang kh, @RequestParam("id") Integer id){
-        kh.setNgaySua(LocalDateTime.now());
+        kh.setNgaySua(new Date());
         kh.setNgayTao(khi.getById(id).getNgayTao());
         khi.save(kh);
         return  "redirect:/khach-hang";

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Controller
 public class HoaDonController {
@@ -25,8 +26,8 @@ public class HoaDonController {
     }
     @PostMapping("/hoa-don/add")
     public String add(@ModelAttribute("ds") HoaDon hd){
-        hd.setNgayTao(LocalDateTime.now());
-        hd.setNgaySua(LocalDateTime.now());
+        hd.setNgayTao(new Date());
+        hd.setNgaySua(new Date());
         hdrp.save(hd);
         return  "redirect:/hoa-don";
     }
@@ -37,7 +38,7 @@ public class HoaDonController {
     }
     @PostMapping("/hoa-don/update")
     public String update(@ModelAttribute("ds") HoaDon hd, @RequestParam("id") Integer id){
-        hd.setNgaySua(LocalDateTime.now());
+        hd.setNgaySua(new Date());
         hd.setNgayTao(hdrp.getById(id).getNgayTao());
         hdrp.save(hd);
         return  "redirect:/hoa-don";

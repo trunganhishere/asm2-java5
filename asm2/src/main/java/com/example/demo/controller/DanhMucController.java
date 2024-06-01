@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Controller
 public class DanhMucController {
@@ -25,8 +26,8 @@ public class DanhMucController {
 
     @PostMapping("/danh-muc/add")
     public String add(@ModelAttribute("dm") DanhMuc dm){
-        dm.setNgayTao(LocalDateTime.now());
-        dm.setNgaySua(LocalDateTime.now());
+        dm.setNgayTao(new Date());
+        dm.setNgaySua(new Date());
         dmi.save(dm);
         return  "redirect:/danh-muc";
     }
@@ -37,7 +38,7 @@ public class DanhMucController {
     }
     @PostMapping("/danh-muc/update")
     public String update(@ModelAttribute("dm") DanhMuc dm, @RequestParam("id") Integer id){
-        dm.setNgaySua(LocalDateTime.now());
+        dm.setNgaySua(new Date());
         dm.setNgayTao(dmi.getById(id).getNgayTao());
         dmi.save(dm);
         return  "redirect:/danh-muc";

@@ -8,12 +8,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Date;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -33,9 +37,11 @@ public class SanPham {
     @Column(name="trang_thai")
     private String trangThai;
     @Column(name="ngay_tao")
-    private LocalDateTime ngayTao;
+    @Temporal(TemporalType.DATE)
+    private Date ngayTao;
     @Column(name="ngay_sua")
-    private LocalDateTime  ngaySua;
+    @Temporal(TemporalType.DATE)
+    private Date  ngaySua;
     @ManyToOne
     @JoinColumn(name = "id_danh_muc")
     private DanhMuc danhMuc;

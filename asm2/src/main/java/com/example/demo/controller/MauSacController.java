@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Controller
 public class MauSacController {
@@ -26,8 +27,8 @@ public class MauSacController {
     }
     @PostMapping("/mau-sac/add")
     public String add(@ModelAttribute("ds") MauSac ms){
-        ms.setNgayTao(LocalDateTime.now());
-        ms.setNgaySua(LocalDateTime.now());
+        ms.setNgayTao(new Date());
+        ms.setNgaySua(new Date());
         msrp.save(ms);
         return  "redirect:/mau-sac";
     }
@@ -38,7 +39,7 @@ public class MauSacController {
     }
     @PostMapping("/mau-sac/update")
     public String update(@ModelAttribute("ds") MauSac ms, @RequestParam("id") Integer id){
-        ms.setNgaySua(LocalDateTime.now());
+        ms.setNgaySua(new Date());
         ms.setNgayTao(msrp.getById(id).getNgayTao());
         msrp.save(ms);
         return  "redirect:/mau-sac";

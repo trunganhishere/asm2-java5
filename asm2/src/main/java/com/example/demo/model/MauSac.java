@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Date;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter @Setter
@@ -24,7 +26,9 @@ public class MauSac {
     @Column(name="trang_thai")
     private String trangThai;
     @Column(name="ngay_tao")
-    private LocalDateTime ngayTao;
+    @Temporal(TemporalType.DATE)
+    private Date ngayTao;
     @Column(name="ngay_sua")
-    private LocalDateTime  ngaySua;
+    @Temporal(TemporalType.DATE)
+    private Date  ngaySua;
 }
