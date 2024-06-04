@@ -6,25 +6,41 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter @Setter
+@Getter
+@Setter
 @Entity
-@Table(name = "mau_sac")
-public class MauSac {
+@Table(name="hdct")
+public class HoaDonChiTiet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private Integer id;
-    @Column(name="ma_mau")
-    private String maMau;
-    @Column(name="ten_mau")
-    private String tenMau;
+
+    @Column(name="so_luong_mua")
+    private int soLuongMua;
+
     @Column(name="trang_thai")
     private String trangThai;
+
+    @Column(name="tong_tien")
+    private BigDecimal tongTien;
+
     @Column(name="ngay_tao")
     private LocalDateTime ngayTao;
+
     @Column(name="ngay_sua")
-    private LocalDateTime  ngaySua;
+    private LocalDateTime ngaySua;
+
+    @ManyToOne
+    @JoinColumn(name="id_hoa_don")
+    private HoaDon hoaDon;
+
+    @ManyToOne
+    @JoinColumn(name="id_ctsp")
+    private SanPhamChiTiet sanPhamChiTiet;
 }

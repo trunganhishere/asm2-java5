@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter @Setter
@@ -26,9 +24,7 @@ public class Size {
     @Column(name="trang_thai")
     private String trangThai;
     @Column(name="ngay_tao")
-    @Temporal(TemporalType.DATE)
-    private Date ngayTao;
+    private LocalDateTime ngayTao;
     @Column(name="ngay_sua")
-    @Temporal(TemporalType.DATE)
-    private Date  ngaySua;
+    private LocalDateTime  ngaySua;
 }

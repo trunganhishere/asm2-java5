@@ -6,6 +6,7 @@ import com.example.demo.repository.DanhMucInterface;
 import com.example.demo.repository.SanPhamInterface;
 import com.example.demo.repository.SizeInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Controller
 public class SizeController {
@@ -22,14 +22,18 @@ public class SizeController {
     SizeInterface srp;
 
     @GetMapping("/size")
-    public String danhMuc(Model model){
-        model.addAttribute("ds",srp.findAll());
-        return "viewSize";
+    public String danhMuc(Model model,
+                          @RequestParam(name="page",defaultValue = "0")int pageNo,
+                          @RequestParam(name="limit",defaultValue = "5")int pageSize
+                          ){
+        PageRequest p=PageRequest.of(pageNo,pageSize);
+        model.addAttribute("ds",srp.findAll(p));
+        return "size/Size";
     }
     @PostMapping("/size/add")
     public String add(@ModelAttribute("ds") Size s){
-        s.setNgayTao(new Date());
-        s.setNgaySua(new Date());
+        s.setNgayTao(LocalDateTime.now());
+        s.setNgaySua(LocalDateTime.now());
         srp.save(s);
         return  "redirect:/size";
     }
@@ -40,15 +44,16 @@ public class SizeController {
     }
     @PostMapping("/size/update")
     public String update(@ModelAttribute("ds") Size s, @RequestParam("id") Integer id){
-        s.setNgaySua(new Date());
+        s.setNgaySua(LocalDateTime.now());
         s.setNgayTao(srp.getById(id).getNgayTao());
         srp.save(s);
         return  "redirect:/size";
     }
-    @GetMapping ("/size/detail")
+    @GetMapping ("/size/edit")
     public String edit(@RequestParam("id") Integer id, Model model){
         model.addAttribute("s",srp.getOne(id));
         model.addAttribute("ds",srp.findAll());
-        return "viewSize";
+        model.addAttribute("ds", srp.findAll(PageRequest.of(0, 3)));
+        return "size/Size";
     }
 }

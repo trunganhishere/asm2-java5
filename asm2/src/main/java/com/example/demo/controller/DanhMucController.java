@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.model.DanhMuc;
 import com.example.demo.repository.DanhMucInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,43 +12,46 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Controller
 public class DanhMucController {
     @Autowired
-    DanhMucInterface dmi;
+    DanhMucInterface dmrp;
 
     @GetMapping("/danh-muc")
-    public String getAll(Model model){
-        model.addAttribute("dm",dmi.findAll());
-        return "viewDanhMuc";
+    public String danhMuc(Model model,
+                          @RequestParam(name="page",defaultValue = "0")int pageNo,
+                          @RequestParam(name="limit",defaultValue = "5")int pageSize
+                          ){
+        PageRequest p=PageRequest.of(pageNo,pageSize);
+        model.addAttribute("ds",dmrp.findAll(p));
+        return "danh-muc/Danh-Muc";
     }
-
     @PostMapping("/danh-muc/add")
-    public String add(@ModelAttribute("dm") DanhMuc dm){
-        dm.setNgayTao(new Date());
-        dm.setNgaySua(new Date());
-        dmi.save(dm);
+    public String add(@ModelAttribute("ds") DanhMuc dm){
+        dm.setNgayTao(LocalDateTime.now());
+        dm.setNgaySua(LocalDateTime.now());
+        dmrp.save(dm);
         return  "redirect:/danh-muc";
     }
     @GetMapping ("/danh-muc/delete")
-    public String delete(@RequestParam("id") Integer id){
-        dmi.delete(dmi.getById(id));
+    public String delete(@RequestParam("id") Integer id, Model model){
+        dmrp.delete(dmrp.getById(id));
         return  "redirect:/danh-muc";
     }
     @PostMapping("/danh-muc/update")
-    public String update(@ModelAttribute("dm") DanhMuc dm, @RequestParam("id") Integer id){
-        dm.setNgaySua(new Date());
-        dm.setNgayTao(dmi.getById(id).getNgayTao());
-        dmi.save(dm);
+    public String update(@ModelAttribute("ds") DanhMuc dm, @RequestParam("id") Integer id){
+        dm.setNgaySua(LocalDateTime.now());
+        dm.setNgayTao(dmrp.getById(id).getNgayTao());
+        dmrp.save(dm);
         return  "redirect:/danh-muc";
     }
-    @GetMapping ("/danh-muc/detail")
+    @GetMapping ("/danh-muc/edit")
     public String edit(@RequestParam("id") Integer id, Model model){
-        model.addAttribute("go",dmi.getOne(id));
-        model.addAttribute("dm",dmi.findAll());
-        return "viewDanhMuc";
-    }
+        model.addAttribute("dm",dmrp.getOne(id));
+        model.addAttribute("ds",dmrp.findAll());
+        model.addAttribute("ds", dmrp.findAll(PageRequest.of(0, 3)));
 
+        return "danh-muc/Danh-Muc";
+    }
 }

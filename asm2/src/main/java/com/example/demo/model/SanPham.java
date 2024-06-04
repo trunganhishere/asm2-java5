@@ -1,30 +1,18 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.time.LocalDateTime;
 import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Getter @Setter
 @Entity
 @Table(name="san_pham")
-
 public class SanPham {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,12 +25,12 @@ public class SanPham {
     @Column(name="trang_thai")
     private String trangThai;
     @Column(name="ngay_tao")
-    @Temporal(TemporalType.DATE)
-    private Date ngayTao;
+//    @Temporal(TemporalType.DATE)
+    private LocalDateTime     ngayTao;
     @Column(name="ngay_sua")
-    @Temporal(TemporalType.DATE)
-    private Date  ngaySua;
+//    @Temporal(TemporalType.DATE)
+    private LocalDateTime ngaySua;
     @ManyToOne
-    @JoinColumn(name = "id_danh_muc")
+    @JoinColumn(name="id_danh_muc")
     private DanhMuc danhMuc;
 }

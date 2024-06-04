@@ -1,34 +1,22 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Getter @Setter
 @Entity
-@Table(name="khach_hang")
+@Table(name = "khach_hang")
 public class KhachHang {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private Integer id;
+    private String id;
     @Column(name="ho_ten")
     private String hoTen;
     @Column(name="dia_chi")
@@ -38,9 +26,7 @@ public class KhachHang {
     @Column(name="trang_thai")
     private String trangThai;
     @Column(name="ngay_tao")
-    @Temporal(TemporalType.DATE)
-    private Date ngayTao;
+    private LocalDateTime ngayTao;
     @Column(name="ngay_sua")
-    @Temporal(TemporalType.DATE)
-    private Date ngaySua;
+    private LocalDateTime  ngaySua;
 }

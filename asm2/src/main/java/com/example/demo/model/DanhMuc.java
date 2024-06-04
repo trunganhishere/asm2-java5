@@ -1,42 +1,30 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Getter @Setter
 @Entity
-@Table(name="danh_muc")
+@Table(name = "danh_muc")
 public class DanhMuc {
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Column(name="id")
-        private Integer id;
-        @Column(name="ma_danh_muc")
-        private String maDanhMuc;
-        @Column(name="ten_danh_muc")
-        private String tenDanhMuc;
-        @Column(name="trang_thai")
-        private String trangThai;
-        @Column(name="ngay_tao")
-        @Temporal(TemporalType.DATE)
-        private Date ngayTao;
-        @Column(name="ngay_sua")
-        @Temporal(TemporalType.DATE)
-        private Date ngaySua;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
+    private Integer id;
+    @Column(name="ma_danh_muc")
+    private String maDanhMuc;
+    @Column(name="ten_danh_muc")
+    private String tenDanhMuc;
+    @Column(name="trang_thai")
+    private String trangThai;
+    @Column(name="ngay_tao")
+    private LocalDateTime ngayTao;
+    @Column(name="ngay_sua")
+    private LocalDateTime  ngaySua;
 }
